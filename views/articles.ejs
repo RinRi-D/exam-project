@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Main page</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Blog Articles Page <%= page %></h1>
+        <%
+        let pg = Number(page)
+        for(let i = articles.length - 1 - (pg-1)*col; i >= Math.max(0, articles.length - pg*col); --i)
+        { %>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h2 class="card-title"> <%= articles[i].title %> </h4>
+                    <h7 class="card-subtitle text-muted mb-2"> <%= articles[i].username %> </h7>
+                    <p class="card-text"> <%= articles[i].arttext %> </p>
+                </div>
+            </div>
+        <% } %>
+       
+        <div class="mt-5">
+            <a class="btn btn-primary <% if(pg <= 1){ %> disabled <% } %>" href="/articles?page=<%= pg-1 %>" > Previous Page</a>
+            <a class="btn btn-primary <% if(pg >= (articles.length)/2) { %> disabled <% } %>" href="/articles?page=<%= pg+1 %>" > Next Page</a>
+        </div>
+
+    </div>
+</body>
+</html>
